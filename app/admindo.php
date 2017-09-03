@@ -8,15 +8,14 @@
 header("Content-type: text/html; charset=utf-8");
 require_once("../inc/config.php");
 
-    if(isset($_POST["username"])||isset($_POST["password"])||isset($_POST["action"])){
-        $username = addslashes($_POST["username"]);
-        $password = addslashes($_POST["password"]);
-        $action = addslashes($_POST["action"]);
+        $username = addslashes(_post("username"));
+        $password = addslashes(_post("password"));
+        $action = addslashes(_post("action"));
         if($username == ""&&$password==""&&$action == ""){
             $return_json = json_encode(array("status"=>"error"));//重新提交失败
             echo $return_json;
         }
-    }
+    
     if($action == "login"){
         echo login($conn,$username,$password);
     }
@@ -49,4 +48,13 @@ require_once("../inc/config.php");
             return $result_json;
         }
     }
+	
+	function _get($str){ 
+		$val = !empty($_GET[$str]) ? $_GET[$str] : null; 
+		return $val; 
+	}
+	function _post($str){ 
+		$val = !empty($_POST[$str]) ? $_POST[$str] : null; 
+		return $val; 
+	} 
 ?>

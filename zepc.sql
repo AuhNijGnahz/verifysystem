@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 2017-07-13 09:53:16
+-- Generation Time: 2017-07-13 08:27:15
 -- 服务器版本： 5.7.18
 -- PHP Version: 7.0.1
 
@@ -40,7 +40,8 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`uid`, `username`, `password`, `available`) VALUES
-(3, 'admin', 'admin', 1);
+(1, 'zjh4473', 'zjh19970223', 1),
+(2, 'lukexin', '1299415013', 1);
 
 -- --------------------------------------------------------
 
@@ -56,6 +57,15 @@ CREATE TABLE `userverify` (
   `status` int(11) NOT NULL COMMENT '1-审核通过;2-审核中;3-已驳回',
   `verifytime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `userverify`
+--
+
+INSERT INTO `userverify` (`uid`, `name`, `xuehao`, `major`, `status`, `verifytime`) VALUES
+(16, '张晋华', '0705150231', '0705|供用电技术', 1, '2017-07-12 17:39:04'),
+(18, '常瑶', '0707160306', '0703|电力系统自动化技术', 1, '2017-07-13 01:11:13'),
+(19, '鲁柯新', '0200160312', '0200|电气自动化技术', 1, '2017-07-13 05:26:11');
 
 --
 -- Indexes for dumped tables
@@ -81,7 +91,7 @@ ALTER TABLE `userverify`
 -- 使用表AUTO_INCREMENT `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- 使用表AUTO_INCREMENT `userverify`
 --

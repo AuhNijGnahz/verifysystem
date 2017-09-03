@@ -4,13 +4,20 @@
 * @copyright 2017
 */
 header("Content-type: text/html; charset=utf-8");
+ini_set("error_reporting","E_ALL & ~E_NOTICE");
 
-if (isset($_GET["name"]) || isset($_GET["xuehao"]) || isset($_GET["major"]) || isset($_GET["verifytime"])) {
-    $name = $_GET["name"];
-    $xuehao = $_GET["xuehao"];
-    $major = $_GET["major"];
-}
+    $name = _get("name");
+    $xuehao = _get("xuehao");
+    $major = _get("major");
 
+	function _get($str){ 
+		$val = !empty($_GET[$str]) ? $_GET[$str] : null; 
+		return $val; 
+	}
+	function _post($str){ 
+		$val = !empty($_POST[$str]) ? $_POST[$str] : null; 
+		return $val; 
+	} 
 ?>
 <link href="css/verify.css" rel="stylesheet" type="text/css" />
 <script src="js/jquery-3.1.1.min.js"></script>

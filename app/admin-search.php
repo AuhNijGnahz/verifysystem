@@ -6,14 +6,14 @@
  */
 
 header("Content-type: text/html; charset=utf-8");
+ini_set("error_reporting","E_ALL & ~E_NOTICE");
 require_once("../inc/config.php");
 session_start();
     if(checklogin()==true){
-        if(isset($_POST["status"])||isset($_POST["action"])||isset($_POST["acid"])){
-            $status = addslashes($_POST["status"]);
-            $action = addslashes($_POST["action"]);
-            $acid = addslashes($_POST["acid"]);
-        }
+
+            $status = addslashes(_POST("status"));
+            $action = addslashes(_POST("action"));
+            $acid = addslashes(_POST("acid"));
         if($action == "search"&&$status !=""){
             if($status != "0"){
                 $sql_select = "SELECT * FROM userverify WHERE status='$status'";
@@ -89,5 +89,12 @@ session_start();
         }
     }
 
-    
+    function _get($str){ 
+		$val = !empty($_GET[$str]) ? $_GET[$str] : null; 
+		return $val; 
+	}
+	function _post($str){ 
+		$val = !empty($_POST[$str]) ? $_POST[$str] : null; 
+		return $val; 
+	} 
 ?>

@@ -8,16 +8,16 @@
     require_once('./inc/config.php');
 
     //获取信息
-	if(isset($_POST["name"])||isset($_POST["xuehao"])||isset($_POST["major"])||isset($_POST["action"])){
-		$name       = addslashes($_POST["name"]);
-		$xuehao     = addslashes($_POST["xuehao"]);
-		$major      = addslashes($_POST["major"]);
-		$action 	= addslashes($_POST["action"]);//1-只读取数据；2-提交数据
+
+		$name       = addslashes(_POST("name"));
+		$xuehao     = addslashes(_POST("xuehao"));
+		$major      = addslashes(_POST("major"));
+		$action 	= addslashes(_POST("action"));//1-只读取数据；2-提交数据
 		if($name == ""&&$xuehao == ""&&major == ""&&$action == ""){
 			$return_json = json_encode(array("status"=>"error"));//重新提交失败
 			echo $return_json;
 		}
-	}
+
     $status     = "2";
 	switch($action){
 		case "1":
@@ -80,5 +80,12 @@
 			return $return_json;
 		}
 	}
-
+	function _get($str){ 
+		$val = !empty($_GET[$str]) ? $_GET[$str] : null; 
+		return $val; 
+	}
+	function _post($str){ 
+		$val = !empty($_POST[$str]) ? $_POST[$str] : null; 
+		return $val; 
+	} 
 ?>

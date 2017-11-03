@@ -6,9 +6,9 @@
 header("Content-type: text/html; charset=utf-8");
 ini_set("error_reporting","E_ALL & ~E_NOTICE");
 
-    $name = _get("name");
-    $xuehao = _get("xuehao");
-    $major = _get("major");
+    $name = htmlspecialchars(_get("name"));
+    $xuehao = htmlspecialchars(_get("xuehao"));
+    $major = htmlspecialchars(_get("major"));
 
 	function _get($str){ 
 		$val = !empty($_GET[$str]) ? $_GET[$str] : null; 

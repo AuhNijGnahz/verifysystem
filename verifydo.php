@@ -19,13 +19,36 @@
 		}
 
     $status     = "2";
-	switch($action){
-		case "1":
-			echo checkexist($conn,$xuehao);
-			break;
-		case "2":
-			echo newverify($conn,$name,$xuehao,$major,$status);
-			break;
+
+			switch($action){
+			case "1":
+				echo checkexist($conn,$xuehao);
+				break;
+			case "2":
+				if(checkavaliable($conn)==true){
+					echo newverify($conn,$name,$xuehao,$major,$status);
+				}
+				else{
+					$return_json = json_encode(array("status"=>"error"));//重新提交失败
+					echo $return_json;
+				}
+				break;
+		}
+	
+	
+	function checkavaliable($conn){
+		$sql_select="SELECT verifystatus FROM admin_status WHERE id=1";
+        $result_select = mysqli_query($conn,$sql_select);
+		$num = mysqli_num_rows($result_select);
+		$result_assoc = mysqli_fetch_assoc($result_select);
+		$status=$result_assoc["verifystatus"];
+		$result_json = json_encode(array("status"=>$status));
+		if($status=='1'){
+			return TRUE;
+		}
+		else{
+			return FALSE;
+		}
 	}
 	
     function newverify($conn,$name,$xuehao,$major,$status){

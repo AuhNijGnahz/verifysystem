@@ -15,11 +15,11 @@ session_start();
             $action = addslashes(_POST("action"));
             $acid = addslashes(_POST("acid"));
         if($action == "search"&&$status !=""){
-            if($status != "0"){
-                $sql_select = "SELECT * FROM userverify WHERE status='$status'";
+            if($status == "4"){
+				$sql_select = "SELECT * FROM userverify";
             }
             else{
-                $sql_select = "SELECT * FROM userverify";
+                $sql_select = "SELECT * FROM userverify WHERE status='$status'";
             }
             $result_select = mysqli_query($conn,$sql_select);
             $num = mysqli_num_rows($result_select);
@@ -31,8 +31,8 @@ session_start();
                 $name = $result_assoc['name'];
                 $xuehao = $result_assoc['xuehao'];
                 $major =$result_assoc['major'];
-                $status = $result_assoc['status'];
-                switch($status){
+                $status1 = $result_assoc['status'];
+                switch($status1){
                     case "1":
                         $status = "已通过";
                         $action = "<input type='button' id='denied' data-acid='$uid' value='驳回' />";

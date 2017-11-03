@@ -1,5 +1,4 @@
 /// <reference path="jquery-3.1.1.min.js" />
-$(function(){
     $('body').on('click','#searchV',function(){
         var status = $('#stype').val();
         $.post({
@@ -48,4 +47,40 @@ $(function(){
             }
         })
     })
-})
+    	$.post({
+            url:'admin-status.php',
+            data:{'action':'getstatus'},
+            success:function(data){
+                var data = eval('('+data+')');
+                switch(data.status){
+                	case '2':
+                	$('#byx').attr('checked','checked');
+                	break;
+                	case '1':
+                	$('#yx').attr('checked','checked');
+                	break;
+                }
+            }
+       })
+    $('body').on('click','#changeV',function(){
+    	var status = $('input:radio[name="tj"]:checked').val();
+    	$.post({
+    		url:'admin-status.php',
+    		data:{'action':'changest','status':status},
+    		success:function(data){
+    			var data = eval('('+data+')');
+                switch(data.status){
+                    case 'success':
+                        alert('操作成功！');
+                        break;
+                    case 'error':
+                        alert('操作失败！');
+                        break;
+                }
+    		}
+    		
+    	})
+    })
+
+
+
